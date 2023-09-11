@@ -6,15 +6,21 @@ interface NoteState {
   mainNotes: Note[];
   archiveNotes: Note[];
   trashNotes: Note[];
-  editeNote: null | Note;
+  editNote: null | Note;
 }
 const initialState: NoteState = {
   // mainNotes: [],
   mainNotes: [...notes],
   archiveNotes: [],
   trashNotes: [],
-  editeNote: null,
+  editNote: null,
 };
+
+enum noteType {
+  mainNotes = 'mainNotes',
+  archiveNotes = 'archiveNotes',
+  trashNotes = 'trashNotes'
+}
 
 const notesListSlice = createSlice({
   name: "notesList",
@@ -22,7 +28,20 @@ const notesListSlice = createSlice({
   reducers: {
     readNote: (state, { payload }) => {
       const { type, id } = payload;
-      mainNotes.state = payload;
+      const setRead = (notes: noteType) => {
+        state[notes] = state[notes].map((note: Note) => 
+          note.id === id ? {...note, isRead: !note.isRead} : note
+        )
+      }
+
+      if(type === "archive") {
+        setRead(noteType.archiveNotes);
+      } else if(type === "trash") {
+        setRead(noteType.trashNotes);
+      } else {
+        setRead(noteType.mainNotes);
+      }
+      // mainNotes.state = payload;
     },
     setPinnedNotes: (state, { payload }) => {
       state.mainNotes = state.mainNotes.map((note) =>
@@ -73,8 +92,23 @@ const notesListSlice = createSlice({
         tags: note.toLocaleString.filter(({ tag }) => tag !== payload.tag),
       }));
     },
+    // editNote 
+    setEditNote: (state, { payload }) => {
+      state.editNote = payload;
+    }
   },
 });
 
-export const { setPinnedNotes, readNote, unArchiveNote } = notesListSlice.actions;
+export const {
+  setMainNotes,
+  setArchiveNotes,
+  setTrashNotes,
+  unArchiveNote,
+  restoreNote,
+  deleteNote,
+  setPinnedNotes,
+  setEditNote,
+  readNote,
+  removeTags,
+} = notesListSlice.actions;
 export default notesListSlice.reducer;

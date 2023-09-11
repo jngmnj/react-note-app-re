@@ -22,7 +22,7 @@ const Navbar = () => {
         <FiMenu onClick={() => dispatch(toggleMenu(!isOpen))} />
       </div>
       <Container>
-        <div className="nav__page-title">{getStandardName(state)}</div>
+        <div className="nav__page-title">{state ? getStandardName(state) : "Notes"}</div>
         {state !== "Trash" && state !== "Archive" && (
           <ButtonFill onClick={() => dispatch(toggleCreateNoteModal(true))}>
             <span>+</span>

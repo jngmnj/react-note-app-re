@@ -9,6 +9,7 @@ import FilterModal from '../../components/Modal/FilterModal/FilterModal';
 
 const AllNotes = () => {
   const dispatch = useAppDispatch();
+
   const [ searchInput, setSearchInput ] = useState('');
   const { mainNotes } = useAppSelector((state) => state.notesList);
   const { viewFiltersModal } = useAppSelector((state) => state.modal);

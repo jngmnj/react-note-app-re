@@ -24,11 +24,13 @@ const modalSlice = createSlice({
     toggleFiltersModal: (state, { payload }) => {
       state.viewFiltersModal = payload;
     },
-    toggleAddTagsModal: (state, { payload }) => {
-      state.viewAddTagsModal = payload;
-    },
-    toggleEditTagsModal: (state, { payload }) => {
-      state.viewEditTagsModal = payload;
+    toggleTagsModal: (state, { payload }) => {
+      const { type, view } = payload;
+      if(type === "add") {
+        state.viewAddTagsModal = view;
+      } else {
+        state.viewEditTagsModal =view;
+      }
     },
   },
 });
@@ -36,7 +38,6 @@ const modalSlice = createSlice({
 export const {
   toggleCreateNoteModal,
   toggleFiltersModal,
-  toggleAddTagsModal,
-  toggleEditTagsModal,
+  toggleTagsModal,
 } = modalSlice.actions;
 export default modalSlice.reducer;

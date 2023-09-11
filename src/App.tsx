@@ -17,7 +17,7 @@ function App() {
       { viewEditTagsModal && <TagsModal type='edit' /> }
       <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route element={<Layout />}>
               <Route index path="/" element={<AllNotes />} />
               <Route path="/archive" element={<ArchiveNotes />} />
               <Route path="/trash" element={<TrashNotes />} />

@@ -3,8 +3,16 @@ import { Container, ItemsBox, MainBox, StyledLogo } from './Sidebar.style'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleMenu } from '../../store/menu/menuSlice';
 import { NavLink } from 'react-router-dom';
-import { FaLightbulb, FaTag } from 'react-icons/fa';
+import { FaArchive, FaLightbulb, FaTag, FaTrash } from 'react-icons/fa';
 import getStandardName from '../../utils/getStandardName';
+import { toggleTagsModal } from '../../store/modal/modalSlice';
+import { MdEdit } from 'react-icons/md';
+import { v4 } from 'uuid';
+
+const items = [
+  {icon: <FaArchive />, title: "Archive", id: v4() },
+  {icon: <FaTrash />, title: "Trash", id: v4() },
+];
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -45,6 +53,33 @@ const Sidebar = () => {
                   <FaTag />
                 </span>
                 <span>{getStandardName(tag)}</span>
+              </NavLink>
+            </li>
+          ))}
+          {/* edit tag item */}
+          <li
+            className="sidebar__edit-item"
+            onClick={() =>
+              dispatch(toggleTagsModal({ type: "edit", view: true }))
+            }
+          >
+            <span>
+              <MdEdit />
+            </span>
+            <span>Edit Notes</span>
+          </li>
+          {/* other items */}
+          {items.map(({ icon, title, id }) => (
+            <li key={id} onClick={() => dispatch(toggleMenu(!isOpen))}>
+              <NavLink
+                to={`/${title.toLowerCase()}`}
+                state={`${title}`}
+                className={({ isActive }) =>
+                  isActive ? "active-item" : "inactive-item"
+                }
+              >
+                <span>{icon}</span>
+                <span>{title}</span>
               </NavLink>
             </li>
           ))}

@@ -2,7 +2,7 @@ import { v4 } from "uuid";
 
 const notes = [
   {
-    title: "Note 1 title",
+    title: "노트",
     content: "Note 1 content",
     tags: [{ tag: "coding", id: v4() }],
     color: "#cce0ff",
