@@ -32,7 +32,7 @@ const filteredNotes = (notes: Note[], filter: string) => {
       return 0;
     });
   } else if(filter === "edited") {
-
+    const editedNotes = notes.filter(({ editedTime }) => editedTime);
   } else {
 
   }
@@ -49,7 +49,7 @@ const getAllNotes = (mainNotes: Note[], filter: string) => {
           All Notes<span>({normal.length})</span>
         </div>
         <NotesContainer>
-          {mainNotes.map((note) => (
+          {filteredNotes(normal, filter).map((note) => (
             <NoteCard key={note.id} note={note} type="notes" />
           ))}
         </NotesContainer>

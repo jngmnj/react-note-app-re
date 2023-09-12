@@ -89,7 +89,7 @@ const notesListSlice = createSlice({
     removeTags: (state, { payload }) => {
       state.mainNotes = state.mainNotes.map((note) => ({
         ...note,
-        tags: note.toLocaleString.filter(({ tag }) => tag !== payload.tag),
+        tags: note.tags.filter(({ tag }) => tag !== payload.tag),
       }));
     },
     // editNote 

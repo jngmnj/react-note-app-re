@@ -21,7 +21,7 @@ const CreateNoteModal = () => {
 
   const [noteTitle, setNoteTitle] = useState(editNote?.title || "");
   const [content, setContent] = useState(editNote?.content || "");
-  const [addedTags, setAddedTags] = useState(editNote?.tags || "");
+  const [addedTags, setAddedTags] = useState(editNote?.tags || []);
   const [noteColor, setNoteColor] = useState(editNote?.color || "");
   const [priority, setPriority] = useState(editNote?.priority || "");
   

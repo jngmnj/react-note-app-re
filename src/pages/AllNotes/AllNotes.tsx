@@ -15,41 +15,47 @@ const AllNotes = () => {
   const { viewFiltersModal } = useAppSelector((state) => state.modal);
 
   const [ filter, setFilter]  = useState('');
+  const filterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value);
+  };
+
+  const clearHandler = () => {
+    setFilter('');
+  };
 
   return (
     <Container>
-      { viewFiltersModal && (
-        <FilterModal />
+      {viewFiltersModal && (
+        <FilterModal
+          handleFilter={filterHandler}
+          handleClear={clearHandler}
+          filter={filter}
+        />
       )}
-      { mainNotes.length === 0 ? (
+      {mainNotes.length === 0 ? (
         <EmptyMsgBox>노트가 없습니다.</EmptyMsgBox>
-      ):(
+      ) : (
         <>
           <TopBox>
             <InputBox>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                placeholder='검색어를 입력해주세요.'
+                placeholder="검색어를 입력해주세요."
               />
             </InputBox>
-            <div className='notes__filter-btn'>
-              <ButtonOutline
-                onClick={() => dispatch(toggleFiltersModal(true))}
-              >
+            <div className="notes__filter-btn">
+              <ButtonOutline onClick={() => dispatch(toggleFiltersModal(true))}>
                 <span>정렬</span>
               </ButtonOutline>
             </div>
           </TopBox>
-          <Box>
-            {getAllNotes(mainNotes, filter)}
-          </Box>
+          <Box>{getAllNotes(mainNotes, filter)}</Box>
         </>
       )}
-
     </Container>
-  )
+  );
 }
 
 export default AllNotes

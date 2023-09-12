@@ -66,7 +66,7 @@ const Sidebar = () => {
             <span>
               <MdEdit />
             </span>
-            <span>Edit Notes</span>
+            <span>Edit Tags</span>
           </li>
           {/* other items */}
           {items.map(({ icon, title, id }) => (
