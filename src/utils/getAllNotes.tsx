@@ -33,10 +33,14 @@ const filteredNotes = (notes: Note[], filter: string) => {
     });
   } else if(filter === "edited") {
     const editedNotes = notes.filter(({ editedTime }) => editedTime);
+    const normalNotes = notes.filter(({ editedTime }) => !editedTime);
+    return [...editedNotes, ...normalNotes];
   } else {
-
+    return notes;
+    
   }
 }
+
 const getAllNotes = (mainNotes: Note[], filter: string) => {
 
   const pinned = mainNotes.filter(({ isPinned }) => isPinned);
@@ -64,7 +68,7 @@ const getAllNotes = (mainNotes: Note[], filter: string) => {
           Pinned Notes<span>({pinned.length})</span>
         </div>
         <NotesContainer>
-          {mainNotes.map((note) => (
+          {filteredNotes(pinned, filter).map((note) => (
             <NoteCard key={note.id} note={note} type="notes" />
           ))}
         </NotesContainer>
@@ -79,7 +83,7 @@ const getAllNotes = (mainNotes: Note[], filter: string) => {
           Pinned Notes<span>({pinned.length})</span>
         </div>
         <NotesContainer>
-          {mainNotes.map((note) => (
+          {filteredNotes(pinned, filter).map((note) => (
             <NoteCard key={note.id} note={note} type="notes" />
           ))}
         </NotesContainer>
@@ -87,14 +91,14 @@ const getAllNotes = (mainNotes: Note[], filter: string) => {
           All Notes<span>({normal.length})</span>
         </div>
         <NotesContainer>
-          {mainNotes.map((note) => (
+          {filteredNotes(normal, filter).map((note) => (
             <NoteCard key={note.id} note={note} type="notes" />
           ))}
         </NotesContainer>
       </>
     );
   }
-
+  
 }
 
 export default getAllNotes

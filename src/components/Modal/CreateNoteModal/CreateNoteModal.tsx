@@ -67,7 +67,7 @@ const CreateNoteModal = () => {
       note = {
         ...note, 
         date,
-        createdTime: new Date.getTime(),
+        createdTime: new Date().getTime(),
         editedTime: null,
         isPinned: false,
         isRead: false,

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Container, StyledNav } from './Navbar.styles'
 import { FiMenu } from 'react-icons/fi';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -11,8 +11,7 @@ import getStandardName from '../../utils/getStandardName';
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const { isOpen } = useAppSelector((state) => state.menu);
-  const { pathname, state } = useLocation(); // state는 어디서 지정함?
-  console.log(state, pathname);
+  const { pathname, state } = useLocation(); 
 
   if(pathname === "/404") return null; 
 

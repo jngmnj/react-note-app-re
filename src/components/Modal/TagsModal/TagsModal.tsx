@@ -12,8 +12,8 @@ import { removeTags } from '../../../store/notesList/notesListSlice';
 
 interface TagsModalProps {
   type: string;
-  addedTags: Tag[];
-  handleTags: (tag: string, type: string) => void;
+  addedTags?: Tag[];
+  handleTags?: (tag: string, type: string) => void;
 }
 const TagsModal = ({ type, addedTags, handleTags }: TagsModalProps) => {
   const dispatch = useAppDispatch();
