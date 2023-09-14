@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const Box = styled.div`
   width: clamp(250px, 60%, 280px);

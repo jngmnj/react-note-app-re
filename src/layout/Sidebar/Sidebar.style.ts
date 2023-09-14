@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const Container = styled.nav<{ $openMenu: string }>`
   @media screen and (max-width: 950px) {

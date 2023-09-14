@@ -37,7 +37,7 @@ const modules = {
 
 const TextEditor = ({ color, content, setContent }: TextEditorProps) => {
   return (
-    <Container noteColor={color}>
+    <Container $noteColor={color}>
       <ReactQuill
         formats={formats}
         modules={modules}

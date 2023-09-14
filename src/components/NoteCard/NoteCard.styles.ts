@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const Card = styled.div`
   width: clamp(250px, 100%, 265px);
