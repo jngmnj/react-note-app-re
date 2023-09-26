@@ -7,6 +7,7 @@ import { readNote, setPinnedNotes } from '../../store/notesList/notesListSlice';
 import { BsFillPinFill } from 'react-icons/bs';
 import getRelevantBtns from './../../../../react-note-app/src/utils/getRelevantBtns';
 import parse from "html-react-parser";
+import ReadNoteModal from '../Modal/ReadNoteModal/ReadNoteModal';
 
 interface NoteCardProps {
   note: Note;
@@ -28,36 +29,39 @@ const NoteCard = ({ note, type }: NoteCardProps) => {
   };
 
   return (
-    <Card style={{ background: color }}>
-      <TopBox>
-        <div className="noteCard__title">
-          {title.length > 10 ? title.slice(0, 10) + "..." : title}
-        </div>
-        <div className="noteCard__top-options">
-          <span className="noteCard__priority">{priority}</span>
-          {type !== "archive" && type !== "trash" && (
-            <NotesIconBox
-              className="noteCard__pin"
-              onClick={() => dispatch(setPinnedNotes({ type, id }))}
-            >
-              <BsFillPinFill style={{ color: isPinned ? "red" : "" }} />
-            </NotesIconBox>
-          )}
-        </div>
-      </TopBox>
-      <ContentBox onClick={() => dispatch(readNote({ type, note }))}>
-        {parse(textPre())}
-      </ContentBox>
-      <TagsBox>
-        {tags.map(({ tag, id }) => (
-          <span key={id}>{tag}</span>
-        ))}
-      </TagsBox>
-      <FooterBox>
-        <div className="noteCard__date">{date}</div>
-        <div>{getRelevantBtns(type, note, dispatch)}</div>
-      </FooterBox>
-    </Card>
+    <>
+    {isRead && <ReadNoteModal type={type} note={note} />}
+      <Card style={{ background: color }}>
+        <TopBox>
+          <div className="noteCard__title">
+            {title.length > 10 ? title.slice(0, 10) + "..." : title}
+          </div>
+          <div className="noteCard__top-options">
+            <span className="noteCard__priority">{priority}</span>
+            {type !== "archive" && type !== "trash" && (
+              <NotesIconBox
+                className="noteCard__pin"
+                onClick={() => dispatch(setPinnedNotes({ type, id }))}
+              >
+                <BsFillPinFill style={{ color: isPinned ? "red" : "" }} />
+              </NotesIconBox>
+            )}
+          </div>
+        </TopBox>
+        <ContentBox onClick={() => dispatch(readNote({ type, id }))}>
+          {parse(textPre())}
+        </ContentBox>
+        <TagsBox>
+          {tags.map(({ tag, id }) => (
+            <span key={id}>{tag}</span>
+          ))}
+        </TagsBox>
+        <FooterBox>
+          <div className="noteCard__date">{date}</div>
+          <div>{getRelevantBtns(type, note, dispatch)}</div>
+        </FooterBox>
+      </Card>
+    </>
   );
 };
 

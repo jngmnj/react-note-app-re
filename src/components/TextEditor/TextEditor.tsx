@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import { Container } from './TextEditor.styles';
-import 'react-quill/dist/quill.bubble.css'
+import 'react-quill/dist/quill.snow.css'
 
 interface TextEditorProps {
   color: string;
@@ -41,7 +41,7 @@ const TextEditor = ({ color, content, setContent }: TextEditorProps) => {
       <ReactQuill
         formats={formats}
         modules={modules}
-        theme="bubble"
+        theme="snow"
         value={content}
         onChange={setContent}
       />
